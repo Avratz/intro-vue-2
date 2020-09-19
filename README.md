@@ -1,1 +1,1 @@
-##Vue 2 intro course @vue mastery
+#Vue 2 intro course @vue mastery
