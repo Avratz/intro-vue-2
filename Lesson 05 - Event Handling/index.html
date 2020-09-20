@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Intro to Vue 2</title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="nav-bar"></div>
+			<div class="product">
+				<div class="product-image">
+					<img :src="image" />
+					<!-- 
+					This <img :src="image" />
+					is the shorter version of this <img v-bind:src="image" /> 
+					We bind the src attribute to the image data in main.js
+				-->
+				</div>
+
+				<div class="product-info">
+					<h1>{{ product }}</h1>
+					<p v-if="inStock">In Stock</p>
+					<p v-else>Out Of Stock</p>
+					<span v-show="onSale">On Sale!</span>
+					<!--
+						#v-if, v-else-if, v-else, v-show#
+						Conditional rendering like v-if add or removes an element of the dom.
+						v-show only hides the element with css styling if the condition its falsy. 
+						This is prefereable when we have only one element and we want to show or hide it.
+					-->
+					<ul>
+						<li v-for="detail in details">{{ detail }}</li>
+					</ul>
+
+					<div v-for="variant in variants" :key="variant.variantId">
+						<p @mouseover="updateProduct(variant.variantImage)">
+							{{ variant.variantColor }}
+						</p>
+					</div>
+
+					<div class="cart">
+						<p>Cart({{ cart }})</p>
+						<!-- 
+							<button v-on:Click="cart++">Add to cart!</button> 
+							This works, but we aslo could create a method for the onClick button.
+						-->
+						<button v-on:Click="addToCart">Add to cart</button>
+						<!-- Shortcut to v-on:[event] is @[event]  -->
+						<button @Click="removeFromCart">Remove from cart</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+		<script src="./main.js"></script>
+	</body>
+</html>
